@@ -1,8 +1,7 @@
 # PHP-MVC
 Basic MVC structure
 
-This is the basic structure I generally use when I'm starting with PHP Projects. It allows the developer to easily create new functions and sections in the system while making use of pretty URLs throughout.
-The code is fully commented and explained, with index.php making the initial call to the bootstrap. The bootstrap is what handles the parsing of the URL and makes the requests as needed to the controllers and functions.
+Custom basic MVC structure gor GiG Test
 
 
 Documentation
@@ -10,38 +9,44 @@ Documentation
 
 This basic MVC skeleton has been redesigned to the best coding practices, in order to speed up development "enjoying design pattern practices".
 
-Please forgive in advance cause I played with your MVC skeleton, it was fun :)
+I reused my own mvc structure that I use to work with for this test.
+
+According to the test, I used an orm to design the database structure, the ORM used is Doctrine.
+I created these entities (User, Item, ItemType).
+
+User and item have a ManyToMany Bidirectional relation.
+Item and ItemType have a OneToOne relation.
+
+In my test, you first add an item name then a slug is created to be sure to have only unique item names. This is ItemType.
+The item entity stores the number of the item and his type (name).
+
+Then, you assign a number and a type of the item to a user.
+The user is an ArrayCollection due to ManyToMany relation, so it is easier to add and remove an item from this point.
+
+There is no need to code an exchange method for items (or maybe it is a misunderstood from my side), because to add an item to a user you simply have to do this:
+http://vps249035.ovh.net/user/item/add and send in post parameters "number = x" and "type = y". Y is the id of the itemType.
+
+By this way you can exchange as you want and it is more scalable.
+
+The main code is inside "Controller" folder. each line is documented, go and see it. All responses are made in JSON with Symfony Http Component.
+
 
 
 Dependencies
 -------------
 
-Instead of reinventing the MVC wheel, I used some of the best open source dependencies like:
-- Doctrine (very useful, especially when you have to deal with relations, ManyToOne, OneToMany...)
-- Twig (your original MVC was mixing php code with html, it's not a good pratice)
-- Tracy  to see all php errors, warnings and exceptions in a more precise way
-- PHP-Router from Danny Van Kooten, that I modified by inheritance inside this project.
-- and more...
+Doctrine, Twig, Symfony Http Component.
 
-To respect the "S" (Single Responsibility) from SOLID principle, each important task has been assigned to dependencies.
-You will find inside "Lib" folder, some helpers and classes I've written.
-
-I prefered yml format for configuration (syntax is easier to read and understand).
-Acl, routes, database and based config have been done in yml format.
-
-I have also coded a very basic ACL system that avoid some unauthorized users to access specific urls... (hoping that the code is well documented).
+I used Twig just to show the home page.
 
 
-The database scheme is included inside "Entity folder". It's a mapping for Doctrine.
-
-Bootstrap free templates have been used for this test for both login, admin and mail side.
 
 
 Requirements
 ------------
 
 - Php >= 5.6 (Check that your php cli has also the same version)
-- I use Nginx as Http server, but feel free to use Apache
+- I used Nginx as Http server
  
 
 Installation
@@ -51,7 +56,7 @@ Let us run the project basically
 
 	cd to/your/directory
 	
-	git clone https://edouardkombo@bitbucket.org/edouardkombo/blexrtest.git
+	git clone https://github.com/edouardkombo/gig-test
 	
 	mkdir cache && chmod -R 777 cache
 	
@@ -64,6 +69,8 @@ Then, if you don't have composer installed please download composer.phar this wa
 	php -r "if (hash_file('SHA384', 'composer-setup.php') === '7228c001f88bee97506740ef0888240bd8a760b046ee16db8f4095c0d8d525f2367663f22a46b48d072c816e7fe19959') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 	php composer-setup.php
 	php -r "unlink('composer-setup.php');"
+	
+	mv composer.phar /usr/local/bin/composer
 
 
 It is recommended to put composer as a global variable in your binary (Linux) or Path environment (Windows)
@@ -88,13 +95,12 @@ Also, configure your smtp credentials to send emails
 	
 Good, now let's create the database 
 	
-	php vendor/bin/doctrine orm:schema-tool:create (For linux)
-	php vendor/doctrine/orm/bin/doctrine orm:schema-tool:create (For windows)
+	php vendor/bin/doctrine orm:schema-tool:create
 	
 	
-Good, now we can create the first admin user in the database (delete this file once done)
+Good, now we have to create a test user just to make our api test to work
 
-	php cli-create-admin.php lastname firstname email password
+	php cli-create-user.php email
 	
 	
 Good, now go to your homepage and VOILA :)
