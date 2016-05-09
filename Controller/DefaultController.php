@@ -33,14 +33,7 @@ class DefaultController {
      */
     public function indexAction()
     {
-        $passport       = $this->dependencyInjector->get('passport.manager');
-
-        //if user is logged in, do not show anymore the login page, instead, redirect to the user page
-        if (false === $passport->isAuthenticated()) {
-            $twig = $this->dependencyInjector->get('template.engine');
-            return $twig->render('/login/login.html.twig');
-        } else {
-            return new RedirectResponse('/user');
-        }
+        $twig = $this->dependencyInjector->get('template.engine');
+        return $twig->render('/login/login.html.twig');
     }
 }

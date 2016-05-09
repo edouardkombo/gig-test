@@ -57,8 +57,6 @@ define('__ROOT_PATH__', realpath(dirname(__FILE__) . '/' ));
     $twig = new \Twig_Environment($loader, array(
         'cache' => __DIR__ . '/cache',
     ));
-    //Create global Session value for twig, to call easily User datas later, and also Role permissions
-    $twig->addGlobal('session', $passport->datas);
 
     /**
      * Inject twig instance into dependency injection container

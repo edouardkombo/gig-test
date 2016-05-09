@@ -3,6 +3,13 @@ Basic MVC structure
 
 Custom basic MVC structure gor GiG Test
 
+Online Demo
+-------------
+
+Visit: http://vps249035.ovh.net/
+
+For PhpMyadmin: http://vps249035.ovh.net:8080/ (root / toto1986)
+
 
 Documentation
 -------------
