@@ -11,6 +11,18 @@ Visit: http://vps249035.ovh.net/
 For PhpMyadmin: http://vps249035.ovh.net:8080/ (root / toto1986)
 
 
+How to use Redis caching?
+-------------------------
+
+It's simple. Doctrine is used as an orm in this project.
+Redis will come as a Mysql cache, as Redis runs in memory, it is faster.
+
+I would code inside "Lib" folder, a driver that implements php-redis main functions and that would allow to switch between Doctrine and Redis.
+I will register this driver inside the service container (Dependency injection I've developped in this project) and, instead of storing datas directly to Mysql, will store them first in Redis with short TTL.
+
+A cron job will then store at periodical time needed datas to Mysql through Doctrine 
+
+
 Documentation
 -------------
 
