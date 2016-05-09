@@ -1,0 +1,40 @@
+{% extends "base/base.html.twig" %}
+
+{% block content %}
+<div class="inner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text">
+                <h1><strong>Gaming Innovation Group</strong> Inspiring iGaming ideas.</h1>
+                <div class="description">
+                    <p>
+                        Api Test, doesn't contain now secured authentication, by default user 1 is selected.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6 col-sm-offset-3 form-box">
+
+                <div id="error" class="btn btn-danger" style="display:none;"></div>
+                <div id="success" class="btn btn-success" style="display:none;"></div>
+
+                <div class="form-top">
+                    <div class="form-top-left">
+                        <h3>These are the available routes (use POSTMAN to simulate the api)</h3>
+                        <p>
+                            user_add_item: http://vps249035.ovh.net/user/item/add (POST)<br/><br/>
+                            user_delete_item: http://vps249035.ovh.net/user/item/delete (DELETE)<br/><br/>
+                            <em>(For the two above, send in parameter with x-www-form-urlencoded in POST or DELETE, "number" and "type")</em><br/><br/>
+
+                            item_add: http://vps249035.ovh.net/item/add (POST)<br/><br/>
+                            <em>(For this one above, send in parameter with x-www-form-urlencoded in POST, "name")</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

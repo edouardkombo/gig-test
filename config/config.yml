@@ -1,0 +1,13 @@
+site:
+    env: dev #prod
+    password_iteration: 15000 #Password iteration count
+
+mail:
+    host: smtp.xxx.com
+    port: 587
+    username: contact@xxx.com
+    password: yourpassword
+    security: tls
+    replyTo: contact@xxxx.com
+    from: contact@mxxxx.com
+    sender_name: Blexr Test

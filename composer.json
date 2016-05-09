@@ -1,0 +1,12 @@
+{
+    "require": {
+        "doctrine/orm": "^2.5",
+        "twig/twig": "~1.0",
+        "symfony/yaml": "^3.0",
+        "dannyvankooten/php-router": "dev-master",
+        "tracy/tracy": "^2.3",
+        "hautelook/phpass": "^1.0",
+        "symfony/http-foundation": "^3.0",
+        "riimu/kit-csrf": "^2.4"
+    }
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Blexr Management{% endblock %}</title>
+
+    {% block css %}
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/assets/admin/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/assets/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- FORBID site access if Javascript is disabled ! -->
+    <noscript>
+        <style type="text/css">
+            .container-fluid {display:none;}
+        </style>
+        <div class="noscriptmsg">
+            Javascript is not enabled, please activate Javascript to use our services.
+        </div>
+    </noscript>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blexr</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ session.user.getFirstName }} {{ session.user.getLastName }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/user/edit/{{ session.user.getId }}"><i class="fa fa-fw fa-user"></i> My profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="/user/edit/{{ session.user.getId }}"><i class="fa fa-fw fa-dashboard"></i> My Profile</a>
+                </li>
+                {% if session.user.getRole == 'ROLE_ADMIN' %}
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#user_group"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="user_group" class="collapse">
+                        <li>
+                            <a href="/user/list/1">List</a>
+                        </li>
+                        <li>
+                            <a href="/user/create">Create new</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#office_group"><i class="fa fa-fw fa-building"></i> Offices <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="office_group" class="collapse">
+                        <li>
+                            <a href="/office/list/1">List</a>
+                        </li>
+                        <li>
+                            <a href="/office/create">Create new</a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#booking_group"><i class="fa fa-fw fa-building"></i> Home-office requests <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="booking_group" class="collapse">
+                        {% if session.user.getRole == 'ROLE_ADMIN' %}
+                        <li>
+                            <a href="/booking/list/1">List</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="/booking">My bookings</a>
+                        </li>
+                        <li>
+                            <a href="/booking/create">Make a New request</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{% block javascripts %}
+<script src="/assets/base/js/Helper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+
+<!-- jQuery -->
+<script src="/assets/admin/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/assets/admin/js/bootstrap.min.js"></script>
+{% endblock %}
+
+</body>
+
+</html>

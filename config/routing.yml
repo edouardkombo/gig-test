@@ -1,0 +1,9 @@
+base_path: /
+
+routes:
+  index: [/, App\Controller\DefaultController.indexAction, GET]
+
+  user_add_item: [/user/item/add, App\Controller\UserController.addAction, POST]
+  user_delete_item: [/user/item/delete, App\Controller\UserController.deleteAction, DELETE]
+
+  item_add: [/item/add, App\Controller\ItemController.addAction, POST]
